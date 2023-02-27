@@ -1,31 +1,55 @@
 type ActiveItem @entity {
-    id: ID!
-    buyer: Bytes! # address
-    seller: Bytes! # address
-    nftAddress: Bytes! # address
-    tokenId: BigInt!
-    price: BigInt
-}
-
-type ItemListed @entity {
-    id: ID!
-    seller: Bytes! # address
-    nftAddress: Bytes! # address
-    tokenId: BigInt!
-    price: BigInt
-}
-
-type ItemCanceled @entity {
-    id: ID!
-    seller: Bytes! # address
-    nftAddress: Bytes! # address
-    tokenId: BigInt!
+  id: ID!
+  buyer: Bytes! # address
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt!
+  price: BigInt
 }
 
 type ItemBought @entity {
-    id: ID!
-    buyer: Bytes! # address
-    nftAddress: Bytes! # address
-    tokenId: BigInt!
-    price: BigInt
+  id: ID!
+  buyer: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  price: BigInt # uint256
+}
+
+type ItemCanceled @entity {
+  id: ID!
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt # uint256
+}
+
+type ItemListed @entity {
+  id: ID!
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  price: BigInt # uint256
+}
+
+type ActiveEvent @entity {
+  id: ID!
+  creator: Bytes! # address
+  nft: Bytes! # address
+}
+
+type ContractCreated @entity {
+  id: ID!
+  creator: Bytes! # address
+  nft: Bytes! # address
+}
+
+type ContractDisabled @entity {
+  id: ID!
+  caller: Bytes! # address
+  nft: Bytes! # address
+}
+
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
 }
