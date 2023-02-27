@@ -1,40 +1,54 @@
+import { Bytes, BigInt, Address } from "@graphprotocol/graph-ts";
 import {
   ContractCreated as ContractCreatedEvent,
   ContractDisabled as ContractDisabledEvent,
-  OwnershipTransferred as OwnershipTransferredEvent
-} from "../generated/EventFactory/EventFactory"
+  OwnershipTransferred as OwnershipTransferredEvent,
+} from "../generated/EventFactory/EventFactory";
 import {
   ContractCreated,
   ContractDisabled,
-  OwnershipTransferred
-} from "../generated/schema"
+  OwnershipTransferred,
+  ActiveEvent,
+} from "../generated/schema";
 
 export function handleContractCreated(event: ContractCreatedEvent): void {
-  let entity = new ContractCreated(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.creator = event.params.creator
-  entity.nft = event.params.nft
+  let contractCreated = ContractCreated.load(
+    getIdFromEventParams(event.params.nft)
+  );
+  let activeEvent = ActiveEvent.load(getIdFromEventParams(event.params.nft));
+  if (!contractCreated) {
+    contractCreated = new ContractCreated(
+      getIdFromEventParams(event.params.nft)
+    );
+  }
+  if (!activeEvent) {
+    activeEvent = new ActiveEvent(getIdFromEventParams(event.params.nft));
+  }
+  contractCreated.creator = event.params.creator;
+  activeEvent.creator = event.params.creator;
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  contractCreated.nft = event.params.nft;
+  activeEvent.nft = event.params.nft;
 
-  entity.save()
+  contractCreated.save();
+  activeEvent.save();
 }
 
 export function handleContractDisabled(event: ContractDisabledEvent): void {
-  let entity = new ContractDisabled(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.caller = event.params.caller
-  entity.nft = event.params.nft
+  let contractDisabled = ContractDisabled.load(
+    getIdFromEventParams(event.params.nft)
+  );
+  let activeEvent = ActiveEvent.load(getIdFromEventParams(event.params.nft));
+  if (!contractDisabled) {
+    contractDisabled = new ContractDisabled(
+      getIdFromEventParams(event.params.nft)
+    );
+  }
+  contractDisabled.caller = event.params.caller;
+  contractDisabled.nft = event.params.nft;
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
+  contractDisabled.save();
+  activeEvent!.save();
 }
 
 export function handleOwnershipTransferred(
@@ -42,13 +56,17 @@ export function handleOwnershipTransferred(
 ): void {
   let entity = new OwnershipTransferred(
     event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.previousOwner = event.params.previousOwner
-  entity.newOwner = event.params.newOwner
+  );
+  entity.previousOwner = event.params.previousOwner;
+  entity.newOwner = event.params.newOwner;
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
 
-  entity.save()
+  entity.save();
+}
+
+function getIdFromEventParams(nft: Address): Bytes {
+  return Bytes.fromHexString(nft.toHexString());
 }

@@ -7,61 +7,49 @@ type ActiveItem @entity {
   price: BigInt
 }
 
-type ItemBought @entity(immutable: true) {
-  id: Bytes!
+type ItemBought @entity {
+  id: ID!
   buyer: Bytes! # address
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
-  price: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  price: BigInt # uint256
 }
 
-type ItemCanceled @entity(immutable: true) {
-  id: Bytes!
+type ItemCanceled @entity {
+  id: ID!
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt # uint256
+}
+
+type ItemListed @entity {
+  id: ID!
   seller: Bytes! # address
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  price: BigInt # uint256
 }
 
-type ItemListed @entity(immutable: true) {
-  id: Bytes!
-  seller: Bytes! # address
-  nftAddress: Bytes! # address
-  tokenId: BigInt! # uint256
-  price: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ContractCreated @entity(immutable: true) {
-  id: Bytes!
+type ActiveEvent @entity {
+  id: ID!
   creator: Bytes! # address
   nft: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
 
-type ContractDisabled @entity(immutable: true) {
-  id: Bytes!
+type ContractCreated @entity {
+  id: ID!
+  creator: Bytes! # address
+  nft: Bytes! # address
+}
+
+type ContractDisabled @entity {
+  id: ID!
   caller: Bytes! # address
   nft: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
 
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
+type OwnershipTransferred @entity {
+  id: ID!
   previousOwner: Bytes! # address
   newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
