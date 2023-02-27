@@ -18,6 +18,7 @@
     "type": "error"
   },
   { "inputs": [], "name": "NotOwner", "type": "error" },
+  { "inputs": [], "name": "PriceAbovePriceCelling", "type": "error" },
   { "inputs": [], "name": "PriceMustBeAboveZero", "type": "error" },
   {
     "inputs": [
