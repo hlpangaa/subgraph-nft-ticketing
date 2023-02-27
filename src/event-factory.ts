@@ -54,19 +54,15 @@ export function handleContractDisabled(event: ContractDisabledEvent): void {
 export function handleOwnershipTransferred(
   event: OwnershipTransferredEvent
 ): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  let ownershipTransferred = new OwnershipTransferred(
+    getIdFromEventParams(event.params.previousOwner)
   );
-  entity.previousOwner = event.params.previousOwner;
-  entity.newOwner = event.params.newOwner;
+  ownershipTransferred.previousOwner = event.params.previousOwner;
+  ownershipTransferred.newOwner = event.params.newOwner;
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  ownershipTransferred.save();
 }
 
-function getIdFromEventParams(nft: Address): Bytes {
-  return Bytes.fromHexString(nft.toHexString());
+function getIdFromEventParams(nftAddress: Address): string {
+  return nftAddress.toHexString();
 }
