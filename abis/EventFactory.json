@@ -1,20 +1,12 @@
 [
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_marketplace",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "_marketplace", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
-  {
-    "inputs": [],
-    "name": "AddressNotRegistered",
-    "type": "error"
-  },
+  { "inputs": [], "name": "AddressNotRegistered", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
@@ -74,31 +66,11 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_symbol",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_contractURI",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_supplyCap",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_mintFee",
-        "type": "uint256"
-      },
+      { "internalType": "string", "name": "_name", "type": "string" },
+      { "internalType": "string", "name": "_symbol", "type": "string" },
+      { "internalType": "string", "name": "_contractURI", "type": "string" },
+      { "internalType": "uint256", "name": "_supplyCap", "type": "uint256" },
+      { "internalType": "uint256", "name": "_mintFee", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "_priceCellingFraction",
@@ -111,13 +83,7 @@
       }
     ],
     "name": "createNFTContract",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -135,47 +101,23 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "exists",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "marketplace",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -188,11 +130,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
     "outputs": [],

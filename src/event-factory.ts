@@ -3,13 +3,13 @@ import {
   ContractCreated as ContractCreatedEvent,
   ContractDisabled as ContractDisabledEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
-} from "../generated/generated/EventFactory/EventFactory";
+} from "../generated/EventFactory/EventFactory";
 import {
   ContractCreated,
   ContractDisabled,
   OwnershipTransferred,
   ActiveEvent,
-} from "../generated/generated/schema";
+} from "../generated/schema";
 
 export function handleContractCreated(event: ContractCreatedEvent): void {
   let contractCreated = ContractCreated.load(

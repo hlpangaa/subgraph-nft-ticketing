@@ -5,14 +5,14 @@ import {
   ItemCanceled as ItemCanceledEvent,
   ItemListed as ItemListedEvent,
   RoyalityPaid as RoyalityPaidEvent,
-} from "../generated/generated/NftMarketplace/NftMarketplace";
+} from "../generated/NftMarketplace/NftMarketplace";
 import {
   ItemListed,
   ActiveItem,
   ItemBought,
   ItemCanceled,
   RoyalityPaid,
-} from "../generated/generated/schema";
+} from "../generated/schema";
 
 export function handleItemListed(event: ItemListedEvent): void {
   let itemListed = ItemListed.load(

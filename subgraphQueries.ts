@@ -59,6 +59,18 @@ const GET_LISTED_ITEMS = gql`
   }
 `;
 
+const GET_ROYALITY_PAID = gql`
+  {
+    royalityPaid(first: 5) {
+      buyer
+      receiver
+      nftAddress
+      tokenId
+      royaltyAmount
+    }
+  }
+`;
+
 const GET_CREATED_EVENTS = gql`
   {
     contractCreateds(first: 5) {
