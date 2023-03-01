@@ -81,21 +81,6 @@ export class EventFactory extends ethereum.SmartContract {
     return new EventFactory("EventFactory", address);
   }
 
-  deposit(): BigInt {
-    let result = super.call("deposit", "deposit():(uint256)", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_deposit(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("deposit", "deposit():(uint256)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   exists(param0: Address): boolean {
     let result = super.call("exists", "exists(address):(bool)", [
       ethereum.Value.fromAddress(param0)
@@ -113,21 +98,6 @@ export class EventFactory extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  feeRecipient(): Address {
-    let result = super.call("feeRecipient", "feeRecipient():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_feeRecipient(): ethereum.CallResult<Address> {
-    let result = super.tryCall("feeRecipient", "feeRecipient():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   marketplace(): Address {
@@ -180,14 +150,6 @@ export class ConstructorCall__Inputs {
 
   get _marketplace(): Address {
     return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _feeRecipient(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get _deposit(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
   }
 }
 

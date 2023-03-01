@@ -1,12 +1,12 @@
 {
   "goerli": {
     "NftMarketplace": {
-      "address": "0xA257F6F39719805E35f3d88b3557fD32Cc28d8d2",
-      "startBlock": 8482820
+      "address": "0x16AeBE0a47073F3B0860A8046F1EEb8Abd3C94f6",
+      "startBlock": 8574616
     },
     "EventFactory": {
-      "address": "0xD06e5853BDDC365a3b9816DBe4160e3af9065275",
-      "startBlock": 8482842
+      "address": "0x2F038EBCB91741c41C347561236C5BB461CE3CD3",
+      "startBlock": 8574623
     }
   }
 }

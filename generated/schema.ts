@@ -315,6 +315,91 @@ export class ItemListed extends Entity {
   }
 }
 
+export class RoyalityPaid extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save RoyalityPaid entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type RoyalityPaid must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("RoyalityPaid", id.toString(), this);
+    }
+  }
+
+  static load(id: string): RoyalityPaid | null {
+    return changetype<RoyalityPaid | null>(store.get("RoyalityPaid", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get buyer(): Bytes {
+    let value = this.get("buyer");
+    return value!.toBytes();
+  }
+
+  set buyer(value: Bytes) {
+    this.set("buyer", Value.fromBytes(value));
+  }
+
+  get receiver(): Bytes {
+    let value = this.get("receiver");
+    return value!.toBytes();
+  }
+
+  set receiver(value: Bytes) {
+    this.set("receiver", Value.fromBytes(value));
+  }
+
+  get nftAddress(): Bytes {
+    let value = this.get("nftAddress");
+    return value!.toBytes();
+  }
+
+  set nftAddress(value: Bytes) {
+    this.set("nftAddress", Value.fromBytes(value));
+  }
+
+  get tokenId(): BigInt {
+    let value = this.get("tokenId");
+    return value!.toBigInt();
+  }
+
+  set tokenId(value: BigInt) {
+    this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get royaltyAmount(): BigInt | null {
+    let value = this.get("royaltyAmount");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set royaltyAmount(value: BigInt | null) {
+    if (!value) {
+      this.unset("royaltyAmount");
+    } else {
+      this.set("royaltyAmount", Value.fromBigInt(<BigInt>value));
+    }
+  }
+}
+
 export class ActiveEvent extends Entity {
   constructor(id: string) {
     super();

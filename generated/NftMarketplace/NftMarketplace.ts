@@ -96,6 +96,40 @@ export class ItemListed__Params {
   }
 }
 
+export class RoyalityPaid extends ethereum.Event {
+  get params(): RoyalityPaid__Params {
+    return new RoyalityPaid__Params(this);
+  }
+}
+
+export class RoyalityPaid__Params {
+  _event: RoyalityPaid;
+
+  constructor(event: RoyalityPaid) {
+    this._event = event;
+  }
+
+  get buyer(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get receiver(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get nftAddress(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get royaltyAmount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
 export class NftMarketplace__getListingResultValue0Struct extends ethereum.Tuple {
   get price(): BigInt {
     return this[0].toBigInt();

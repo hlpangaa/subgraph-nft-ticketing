@@ -6,9 +6,9 @@ dataSources:
     name: NftMarketplace
     network: goerli
     source:
-      address: "0xA257F6F39719805E35f3d88b3557fD32Cc28d8d2"
+      address: "0x16AeBE0a47073F3B0860A8046F1EEb8Abd3C94f6"
       abi: NftMarketplace
-      startBlock: 8482820
+      startBlock: 8574616
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -17,6 +17,7 @@ dataSources:
         - ItemBought
         - ItemCanceled
         - ItemListed
+        - RoyalityPaid
       abis:
         - name: NftMarketplace
           file: ./abis/NftMarketplace.json
@@ -27,14 +28,16 @@ dataSources:
           handler: handleItemCanceled
         - event: ItemListed(indexed address,indexed address,indexed uint256,uint256)
           handler: handleItemListed
+        - event: RoyalityPaid(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleRoyalityPaid
       file: ./src/nft-marketplace.ts
   - kind: ethereum
     name: EventFactory
     network: goerli
     source:
-      address: "0xD06e5853BDDC365a3b9816DBe4160e3af9065275"
+      address: "0x2F038EBCB91741c41C347561236C5BB461CE3CD3"
       abi: EventFactory
-      startBlock: 8482842
+      startBlock: 8574623
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
