@@ -18,6 +18,7 @@ dataSources:
         - ItemCanceled
         - ItemListed
         - RoyalityPaid
+        - ItemMinted
       abis:
         - name: NftMarketplace
           file: ./abis/NftMarketplace.json
