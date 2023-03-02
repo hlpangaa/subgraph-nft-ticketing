@@ -96,6 +96,36 @@ export class ItemListed__Params {
   }
 }
 
+export class ItemMinted extends ethereum.Event {
+  get params(): ItemMinted__Params {
+    return new ItemMinted__Params(this);
+  }
+}
+
+export class ItemMinted__Params {
+  _event: ItemMinted;
+
+  constructor(event: ItemMinted) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get nftAddress(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get beneficiary(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get minter(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+}
+
 export class RoyalityPaid extends ethereum.Event {
   get params(): RoyalityPaid__Params {
     return new RoyalityPaid__Params(this);
@@ -310,6 +340,40 @@ export class ListItemCall__Outputs {
   _call: ListItemCall;
 
   constructor(call: ListItemCall) {
+    this._call = call;
+  }
+}
+
+export class MintFromMarketplaceCall extends ethereum.Call {
+  get inputs(): MintFromMarketplaceCall__Inputs {
+    return new MintFromMarketplaceCall__Inputs(this);
+  }
+
+  get outputs(): MintFromMarketplaceCall__Outputs {
+    return new MintFromMarketplaceCall__Outputs(this);
+  }
+}
+
+export class MintFromMarketplaceCall__Inputs {
+  _call: MintFromMarketplaceCall;
+
+  constructor(call: MintFromMarketplaceCall) {
+    this._call = call;
+  }
+
+  get _to(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get nftAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class MintFromMarketplaceCall__Outputs {
+  _call: MintFromMarketplaceCall;
+
+  constructor(call: MintFromMarketplaceCall) {
     this._call = call;
   }
 }

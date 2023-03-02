@@ -5,6 +5,7 @@ import {
   ItemCanceled as ItemCanceledEvent,
   ItemListed as ItemListedEvent,
   RoyalityPaid as RoyalityPaidEvent,
+  ItemMinted as ItemMintedEvent,
 } from "../generated/NftMarketplace/NftMarketplace";
 import {
   ItemListed,
@@ -12,6 +13,7 @@ import {
   ItemBought,
   ItemCanceled,
   RoyalityPaid,
+  ItemMinted,
 } from "../generated/schema";
 
 export function handleItemListed(event: ItemListedEvent): void {
@@ -111,6 +113,23 @@ export function handleRoyalityPaid(event: RoyalityPaidEvent): void {
   royalityPaid.royaltyAmount = event.params.royaltyAmount;
 
   royalityPaid.save();
+}
+
+export function handleItemMinted(event: ItemMintedEvent): void {
+  let itemMinted = ItemMinted.load(
+    getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+  );
+  if (!itemMinted) {
+    itemMinted = new ItemMinted(
+      getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+    );
+  }
+  itemMinted.minter = event.params.minter;
+  itemMinted.beneficiary = event.params.beneficiary;
+  itemMinted.nftAddress = event.params.nftAddress;
+  itemMinted.tokenId = event.params.tokenId;
+
+  itemMinted.save();
 }
 
 function getIdFromEventParams(tokenId: BigInt, nftAddress: Address): string {

@@ -39,6 +39,14 @@ type RoyalityPaid @entity {
   royaltyAmount: BigInt # uint256
 }
 
+type ItemMinted @entity {
+  id: ID!
+  tokenId: BigInt! # uint256
+  nftAddress: Bytes! # address
+  beneficiary: Bytes! # address
+  minter: Bytes! # address
+}
+
 type ActiveEvent @entity {
   id: ID!
   creator: Bytes! # address
