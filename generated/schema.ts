@@ -684,6 +684,101 @@ export class ItemMinted extends Entity {
   }
 }
 
+export class ItemOwned extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ItemOwned entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ItemOwned must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ItemOwned", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ItemOwned | null {
+    return changetype<ItemOwned | null>(store.get("ItemOwned", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get nftAddress(): Bytes {
+    let value = this.get("nftAddress");
+    return value!.toBytes();
+  }
+
+  set nftAddress(value: Bytes) {
+    this.set("nftAddress", Value.fromBytes(value));
+  }
+
+  get tokenId(): BigInt {
+    let value = this.get("tokenId");
+    return value!.toBigInt();
+  }
+
+  set tokenId(value: BigInt) {
+    this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get txHash(): Bytes {
+    let value = this.get("txHash");
+    return value!.toBytes();
+  }
+
+  set txHash(value: Bytes) {
+    this.set("txHash", Value.fromBytes(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value!.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value!.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get gasPrice(): BigInt {
+    let value = this.get("gasPrice");
+    return value!.toBigInt();
+  }
+
+  set gasPrice(value: BigInt) {
+    this.set("gasPrice", Value.fromBigInt(value));
+  }
+}
+
 export class ActiveEvent extends Entity {
   constructor(id: string) {
     super();

@@ -71,6 +71,17 @@ type ItemMinted @entity {
   gasPrice: BigInt! # uint256
 }
 
+type ItemOwned @entity {
+  id: ID!
+  owner: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt!
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
+}
+
 type ActiveEvent @entity {
   id: ID!
   creator: Bytes! # address

@@ -14,6 +14,7 @@ import {
   ItemCanceled,
   RoyalityPaid,
   ItemMinted,
+  ItemOwned,
 } from "../generated/schema";
 
 export function handleItemListed(event: ItemListedEvent): void {
@@ -104,18 +105,34 @@ export function handleItemBought(event: ItemBoughtEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  let itemOwned = ItemOwned.load(
+    getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+  );
+  if (!itemOwned) {
+    itemOwned = new ItemOwned(
+      getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+    );
+  }
   //from ethereum
   itemBought.txHash = event.transaction.hash;
   itemBought.blockNumber = event.block.number;
   itemBought.timestamp = event.block.timestamp;
   itemBought.gasPrice = event.transaction.gasPrice;
+  itemOwned.txHash = itemBought.txHash;
+  itemOwned.blockNumber = itemBought.blockNumber;
+  itemOwned.timestamp = itemBought.timestamp;
+  itemOwned.gasPrice = itemBought.gasPrice;
   //from smart contract event
   itemBought.buyer = event.params.buyer;
   itemBought.nftAddress = event.params.nftAddress;
   itemBought.tokenId = event.params.tokenId;
   activeItem!.buyer = event.params.buyer;
+  itemOwned.owner = itemBought.buyer;
+  itemOwned.nftAddress = itemBought.nftAddress;
+  itemOwned.tokenId = itemBought.tokenId;
 
   itemBought.save();
+  itemOwned.save();
   activeItem!.save();
 }
 
@@ -152,18 +169,34 @@ export function handleItemMinted(event: ItemMintedEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  let itemOwned = ItemOwned.load(
+    getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+  );
+  if (!itemOwned) {
+    itemOwned = new ItemOwned(
+      getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+    );
+  }
   //from ethereum
   itemMinted.txHash = event.transaction.hash;
   itemMinted.blockNumber = event.block.number;
   itemMinted.timestamp = event.block.timestamp;
   itemMinted.gasPrice = event.transaction.gasPrice;
+  itemOwned.txHash = itemMinted.txHash;
+  itemOwned.blockNumber = itemMinted.blockNumber;
+  itemOwned.timestamp = itemMinted.timestamp;
+  itemOwned.gasPrice = itemMinted.gasPrice;
   //from smart contract event
   itemMinted.minter = event.params.minter;
   itemMinted.beneficiary = event.params.beneficiary;
   itemMinted.nftAddress = event.params.nftAddress;
   itemMinted.tokenId = event.params.tokenId;
+  itemOwned.owner = event.params.beneficiary;
+  itemOwned.nftAddress = event.params.nftAddress;
+  itemOwned.tokenId = event.params.tokenId;
 
   itemMinted.save();
+  itemOwned.save();
 }
 
 function getIdFromEventParams(tokenId: BigInt, nftAddress: Address): string {
