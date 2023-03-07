@@ -33,6 +33,16 @@ export function handleItemListed(event: ItemListedEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  //from ethereum
+  itemListed.txHash = event.transaction.hash;
+  itemListed.blockNumber = event.block.number;
+  itemListed.timestamp = event.block.timestamp;
+  itemListed.gasPrice = event.transaction.gasPrice;
+  activeItem.txHash = itemListed.txHash;
+  activeItem.blockNumber = itemListed.blockNumber;
+  activeItem.timestamp = itemListed.timestamp;
+  activeItem.gasPrice = itemListed.gasPrice;
+  //from smart contract event
   itemListed.seller = event.params.seller;
   activeItem.seller = event.params.seller;
 
@@ -65,6 +75,12 @@ export function handleItemCanceled(event: ItemCanceledEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  //from ethereum
+  itemCanceled.txHash = event.transaction.hash;
+  itemCanceled.blockNumber = event.block.number;
+  itemCanceled.timestamp = event.block.timestamp;
+  itemCanceled.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   itemCanceled.seller = event.params.seller;
   itemCanceled.nftAddress = event.params.nftAddress;
   itemCanceled.tokenId = event.params.tokenId;
@@ -88,6 +104,12 @@ export function handleItemBought(event: ItemBoughtEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  //from ethereum
+  itemBought.txHash = event.transaction.hash;
+  itemBought.blockNumber = event.block.number;
+  itemBought.timestamp = event.block.timestamp;
+  itemBought.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   itemBought.buyer = event.params.buyer;
   itemBought.nftAddress = event.params.nftAddress;
   itemBought.tokenId = event.params.tokenId;
@@ -106,6 +128,12 @@ export function handleRoyalityPaid(event: RoyalityPaidEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  //from ethereum
+  royalityPaid.txHash = event.transaction.hash;
+  royalityPaid.blockNumber = event.block.number;
+  royalityPaid.timestamp = event.block.timestamp;
+  royalityPaid.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   royalityPaid.buyer = event.params.buyer;
   royalityPaid.receiver = event.params.receiver;
   royalityPaid.nftAddress = event.params.nftAddress;
@@ -124,6 +152,12 @@ export function handleItemMinted(event: ItemMintedEvent): void {
       getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
   }
+  //from ethereum
+  itemMinted.txHash = event.transaction.hash;
+  itemMinted.blockNumber = event.block.number;
+  itemMinted.timestamp = event.block.timestamp;
+  itemMinted.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   itemMinted.minter = event.params.minter;
   itemMinted.beneficiary = event.params.beneficiary;
   itemMinted.nftAddress = event.params.nftAddress;
