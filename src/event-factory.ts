@@ -24,6 +24,16 @@ export function handleContractCreated(event: ContractCreatedEvent): void {
   if (!activeEvent) {
     activeEvent = new ActiveEvent(getIdFromEventParams(event.params.nft));
   }
+  //from ethereum
+  contractCreated.txHash = event.transaction.hash;
+  contractCreated.blockNumber = event.block.number;
+  contractCreated.timestamp = event.block.timestamp;
+  contractCreated.gasPrice = event.transaction.gasPrice;
+  activeEvent.txHash = event.transaction.hash;
+  activeEvent.blockNumber = event.block.number;
+  activeEvent.timestamp = event.block.timestamp;
+  contractCreated.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   contractCreated.creator = event.params.creator;
   activeEvent.creator = event.params.creator;
 
@@ -44,6 +54,12 @@ export function handleContractDisabled(event: ContractDisabledEvent): void {
       getIdFromEventParams(event.params.nft)
     );
   }
+  //from ethereum
+  contractDisabled.txHash = event.transaction.hash;
+  contractDisabled.blockNumber = event.block.number;
+  contractDisabled.timestamp = event.block.timestamp;
+  contractDisabled.gasPrice = event.transaction.gasPrice;
+  //from smart contract event
   contractDisabled.caller = event.params.caller;
   contractDisabled.nft = event.params.nft;
 

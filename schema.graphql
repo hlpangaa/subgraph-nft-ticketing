@@ -5,6 +5,10 @@ type ActiveItem @entity {
   nftAddress: Bytes! # address
   tokenId: BigInt!
   price: BigInt
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ItemBought @entity {
@@ -13,6 +17,10 @@ type ItemBought @entity {
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
   price: BigInt # uint256
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ItemCanceled @entity {
@@ -20,6 +28,10 @@ type ItemCanceled @entity {
   seller: Bytes! # address
   nftAddress: Bytes! # address
   tokenId: BigInt # uint256
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ItemListed @entity {
@@ -28,6 +40,10 @@ type ItemListed @entity {
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
   price: BigInt # uint256
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type RoyalityPaid @entity {
@@ -37,6 +53,10 @@ type RoyalityPaid @entity {
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
   royaltyAmount: BigInt # uint256
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ItemMinted @entity {
@@ -45,24 +65,40 @@ type ItemMinted @entity {
   nftAddress: Bytes! # address
   beneficiary: Bytes! # address
   minter: Bytes! # address
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ActiveEvent @entity {
   id: ID!
   creator: Bytes! # address
   nft: Bytes! # address
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ContractCreated @entity {
   id: ID!
   creator: Bytes! # address
   nft: Bytes! # address
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type ContractDisabled @entity {
   id: ID!
   caller: Bytes! # address
   nft: Bytes! # address
+  txHash: Bytes! # address
+  blockNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  gasPrice: BigInt! # uint256
 }
 
 type OwnershipTransferred @entity {
