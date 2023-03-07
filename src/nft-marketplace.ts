@@ -38,10 +38,10 @@ export function handleItemListed(event: ItemListedEvent): void {
   itemListed.blockNumber = event.block.number;
   itemListed.timestamp = event.block.timestamp;
   itemListed.gasPrice = event.transaction.gasPrice;
-  activeItem.txHash = event.transaction.hash;
-  activeItem.blockNumber = event.block.number;
-  activeItem.timestamp = event.block.timestamp;
-  activeItem.gasPrice = event.transaction.gasPrice;
+  activeItem.txHash = itemListed.txHash;
+  activeItem.blockNumber = itemListed.blockNumber;
+  activeItem.timestamp = itemListed.timestamp;
+  activeItem.gasPrice = itemListed.gasPrice;
   //from smart contract event
   itemListed.seller = event.params.seller;
   activeItem.seller = event.params.seller;

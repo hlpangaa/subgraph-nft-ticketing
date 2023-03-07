@@ -29,10 +29,10 @@ export function handleContractCreated(event: ContractCreatedEvent): void {
   contractCreated.blockNumber = event.block.number;
   contractCreated.timestamp = event.block.timestamp;
   contractCreated.gasPrice = event.transaction.gasPrice;
-  activeEvent.txHash = event.transaction.hash;
-  activeEvent.blockNumber = event.block.number;
-  activeEvent.timestamp = event.block.timestamp;
-  contractCreated.gasPrice = event.transaction.gasPrice;
+  activeEvent.txHash = contractCreated.txHash;
+  activeEvent.blockNumber = contractCreated.blockNumber;
+  activeEvent.timestamp = contractCreated.timestamp;
+  activeEvent.gasPrice = contractCreated.gasPrice;
   //from smart contract event
   contractCreated.creator = event.params.creator;
   activeEvent.creator = event.params.creator;
