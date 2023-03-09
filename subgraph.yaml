@@ -38,9 +38,9 @@ dataSources:
     name: EventFactory
     network: goerli
     source:
-      address: "0xcabb9b44a429b56c7DF813F773767223D24910c0"
+      address: "0x0C7FEb49915cFfB2e401266d4298814C9da7B8Ac"
       abi: EventFactory
-      startBlock: 8585580
+      startBlock: 8624970
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
